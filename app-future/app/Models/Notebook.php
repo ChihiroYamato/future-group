@@ -15,4 +15,11 @@ class Notebook extends Model
      * @var array<int, string>
      */
     protected $fillable = ['name', 'email', 'phone', 'birth_date', 'company', 'deleted',];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = ['created_at', 'updated_at', 'deleted',];
 }
