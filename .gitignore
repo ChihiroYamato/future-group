@@ -1,0 +1,20 @@
+# Default
+.vscode/
+
+# Test
+test*
+test/
+
+# Composer
+vendor/
+
+# Project
+.env
+
+# DB
+project_database/*
+!project_database/.gitkeep
+
+# Docker logs
+docker_logs/*
+!docker_logs/.gitkeep
