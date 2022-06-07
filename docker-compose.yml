@@ -10,7 +10,7 @@ services:
         - ${DB_PORT}:3306
       environment:
         MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-        MYSQL_DATABASE: ${DB_SQL_DATABASE}
+        MYSQL_DATABASE: ${DB_DATABASE}
       volumes:
         - ${DB_PATH_HOST}:${DB_PATH_CONTAINER}
       networks:
@@ -25,6 +25,7 @@ services:
       volumes:
         - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
         - ${PHP_INI_HOST}:${PHP_INI_CONTAINER}
+        - ${ENV_PATH_HOST}:${ENV_PATH_CONTAINER}
       networks:
         - backend
       depends_on:
