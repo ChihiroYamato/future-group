@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\NotebookController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::post('/auth', [AuthController::class, 'auth']);
 
-Route::apiResource('/notebooks', NotebookController::class);
+Route::apiResource('/notebooks', NotebookController::class)->except(['index', 'show'])->middleware('auth:sanctum');
+Route::apiResource('/notebooks', NotebookController::class)->only(['index', 'show']);
