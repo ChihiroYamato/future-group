@@ -1,0 +1,493 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Future-task API",
+        "description": "List of api methods for future task by Swagger",
+        "contact": {
+            "email": "alexan9610@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8088/api",
+            "description": "API to Future-task"
+        }
+    ],
+    "paths": {
+        "/v1/notebooks": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Get list of notebooks",
+                "description": "Display a listing of the resource.",
+                "operationId": "28433705b5b53f88133505343d526a58",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "max result of notebooks",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "offset of result",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "additionalProperties": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "nextOffset": {
+                                            "type": "integer"
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Store a newly notebook",
+                "description": "Store a newly notebook",
+                "operationId": "ffd3f9b8a9c5f151e8ec23296862218f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Alex"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+7(999)666-55-44"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "testing@test.com"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1999-12-12"
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "example": "Core"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Incorrect data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [
+                            "write:notebook",
+                            "read:notebook"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/v1/notebooks/{notebook_id}": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Get notebook by id",
+                "description": "Get notebook by id",
+                "operationId": "325f9e620d51cb4c4d2c2cf724e8f28b",
+                "parameters": [
+                    {
+                        "name": "notebook_id",
+                        "in": "path",
+                        "description": "Notebook id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notebook is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Update notebook by id",
+                "description": "Update notebook by id",
+                "operationId": "d99b3bfd3d9d292affb6d36a57cbd29c",
+                "parameters": [
+                    {
+                        "name": "notebook_id",
+                        "in": "path",
+                        "description": "Notebook id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Alex"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+7(999)666-55-44"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "testing@test.com"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1999-12-12"
+                                    },
+                                    "company": {
+                                        "type": "string",
+                                        "example": "Core"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Notebook is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Incorrect data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [
+                            "write:notebook",
+                            "read:notebook"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Delete notebook by id",
+                "description": "Delete notebook by id",
+                "operationId": "a3c1892e0860a925c69e23c86343bac1",
+                "parameters": [
+                    {
+                        "name": "notebook_id",
+                        "in": "path",
+                        "description": "Notebook id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success delete"
+                    },
+                    "401": {
+                        "description": "Unauthorized user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": [
+                            "write:notebook",
+                            "read:notebook"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Notebook": {
+                "title": "Notebook",
+                "description": "Notebook model",
+                "properties": {
+                    "id": {
+                        "description": "ID of current notebook",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Full name of subject in notebook",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email of subject in notebook",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Phone of subject in notebook",
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "description": "Birth date of subject in notebook",
+                        "type": "string",
+                        "format": "date",
+                        "default": null
+                    },
+                    "company": {
+                        "description": "Company of subject in notebook",
+                        "type": "string",
+                        "default": null
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

@@ -5,6 +5,44 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @OA\Schema(
+ *  title="Notebook",
+ *  description="Notebook model",
+ *  @OA\Property(
+ *      property="id",
+ *      description="ID of current notebook",
+ *      type="integer"
+ *  ),
+ *  @OA\Property(
+ *      property="name",
+ *      description="Full name of subject in notebook",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="email",
+ *      description="Email of subject in notebook",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="phone",
+ *      description="Phone of subject in notebook",
+ *      type="string"
+ *  ),
+ *  @OA\Property(
+ *      property="birth_date",
+ *      description="Birth date of subject in notebook",
+ *      default=null,
+ *      type="date"
+ *  ),
+ *  @OA\Property(
+ *      property="company",
+ *      description="Company of subject in notebook",
+ *      default=null,
+ *      type="string"
+ *  )
+ * )
+ */
 class Notebook extends Model
 {
     use HasFactory;
