@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Notebook;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\NotebookRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -12,9 +14,11 @@ class NotebookController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param \App\Http\Requests\NotebookRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(NotebookRequest $request)
+    public function index(NotebookRequest $request) : JsonResponse
     {
         $total = Notebook::where('deleted', 0)->count();
         $nextOffset = null;
@@ -40,10 +44,11 @@ class NotebookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\NotebookRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param \App\Http\Requests\NotebookRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(NotebookRequest $request)
+    public function store(NotebookRequest $request) : JsonResponse
     {
         $notebook = Notebook::create($request->validated());
 
@@ -56,11 +61,13 @@ class NotebookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Notebook  $notebook
-     * @return \Illuminate\Http\Response
+     * @param \App\Models\Notebook $notebook
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function show(Notebook $notebook)
+    public function show(Notebook $notebook) : JsonResponse
     {
         if (((bool) $notebook->deleted) === true) {
             throw new ModelNotFoundException('No query results for model');
@@ -75,12 +82,14 @@ class NotebookController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\NotebookRequest  $request
-     * @param  \App\Models\Notebook  $notebook
-     * @return \Illuminate\Http\Response
+     * @param \App\Http\Requests\NotebookRequest $request
+     * @param \App\Models\Notebook $notebook
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function update(NotebookRequest $request, Notebook $notebook)
+    public function update(NotebookRequest $request, Notebook $notebook) : JsonResponse
     {
         if (((bool) $notebook->deleted) === true) {
             throw new ModelNotFoundException('No query results for model');
@@ -98,9 +107,10 @@ class NotebookController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Notebook  $notebook
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notebook $notebook)
+    public function destroy(Notebook $notebook) : Response
     {
         $notebook->update(['deleted' => true]);
 

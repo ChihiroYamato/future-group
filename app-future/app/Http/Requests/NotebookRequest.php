@@ -26,7 +26,7 @@ class NotebookRequest extends FormRequest
         $rules = [
             'name' => 'string|min:3',
             'phone' => 'string|regex:/^\+?[7-8]?\(?9\d{2}\)?\-?\d{3}\-?\d{2}\-?\d{2}$/',
-            'email' => 'string|regex:/^[^@]+@\w{2,}\.\w{2,}$/',
+            'email' => 'string|email',
             'company' => 'string|min:2',
             'birth_date' => 'date',
         ];
