@@ -17,7 +17,7 @@ services:
         - backend
 
     app:
-      image: app:1.0
+      image: future-app:1.0
       container_name: future-app
       build: ./images/php-fpm
       restart: unless-stopped
@@ -25,7 +25,6 @@ services:
       volumes:
         - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
         - ${PHP_INI_HOST}:${PHP_INI_CONTAINER}
-        - ${ENV_PATH_HOST}:${ENV_PATH_CONTAINER}
       networks:
         - backend
       depends_on:
